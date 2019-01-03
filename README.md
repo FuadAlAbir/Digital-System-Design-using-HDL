@@ -1,1 +1,1 @@
-# Digital-System-Design-using-HDL
+# Digital System Design using HDL

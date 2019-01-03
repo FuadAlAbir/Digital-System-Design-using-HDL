@@ -1,0 +1,28 @@
+CHIP Xor {
+    IN a, b;
+    OUT out;
+
+    PARTS:
+    // 0: Using Nand gates only
+    Nand(a=a, b=a, out=n1);
+    Nand(a=b, b=b, out=n2);
+    Nand(a=n1, b=b, out=n3);
+    Nand(a=a, b=n2, out=n4);
+    Nand(a=n3, b=n4, out=out);
+
+    // 1: (a+b).(ab)'
+    /*
+    Or(a=a, b=b, out=w1);
+    Nand(a=a, b=b, out=w2);
+    And(a=w1, b=w2, out=out);
+    */
+
+    // 2: ab'+a'b
+    /*
+    Not(in=a, out=notA);
+    Not(in=b, out=notB);
+    And(a=a, b=notB, out=w1);
+    And(a=notA, b=b, out=w2);
+    Or(a=w1, b=w2, out=out);
+    */
+}

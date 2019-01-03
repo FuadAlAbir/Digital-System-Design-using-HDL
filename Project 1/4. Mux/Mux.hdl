@@ -1,0 +1,20 @@
+CHIP Mux
+{
+    IN a, b, s;
+    OUT out;
+
+    PARTS:
+    // if(s==0) out=a
+    Nand(a=b, b=s, out=n1);
+    Nand(a=s, b=s, out=n2);
+    Nand(a=n2, b=a, out=n3);
+    Nand(a=n1, b=n3, out=out);
+
+    // if(s==0) out=b
+    /*
+    Nand(a=a, b=s, out=n1);
+    Nand(a=s, b=s, out=n2);
+    Nand(a=n2, b=b, out=n3);
+    Nand(a=n1, b=n3, out=out);
+    */
+}
