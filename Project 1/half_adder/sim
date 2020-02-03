@@ -1,0 +1,55 @@
+#! /usr/bin/vvp
+:ivl_version "10.1 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x55e005739730 .scope module, "testbench" "testbench" 2 1;
+ .timescale 0 0;
+v0x55e005759c90_0 .var "A", 0 0;
+v0x55e005759d50_0 .var "B", 0 0;
+v0x55e005759e20_0 .net "C", 0 0, L_0x55e00575a1f0;  1 drivers
+v0x55e005759f20_0 .net "S", 0 0, L_0x55e005759ff0;  1 drivers
+S_0x55e0057398b0 .scope module, "DUT" "half_adder" 2 4, 3 1 0, S_0x55e005739730;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "A"
+    .port_info 1 /INPUT 1 "B"
+    .port_info 2 /OUTPUT 1 "S"
+    .port_info 3 /OUTPUT 1 "C"
+L_0x55e005759ff0/d .functor XOR 1, v0x55e005759c90_0, v0x55e005759d50_0, C4<0>, C4<0>;
+L_0x55e005759ff0 .delay 1 (1,1,1) L_0x55e005759ff0/d;
+L_0x55e00575a1f0/d .functor AND 1, v0x55e005759c90_0, v0x55e005759d50_0, C4<1>, C4<1>;
+L_0x55e00575a1f0 .delay 1 (1,1,1) L_0x55e00575a1f0/d;
+v0x55e005739aa0_0 .net "A", 0 0, v0x55e005759c90_0;  1 drivers
+v0x55e0057599c0_0 .net "B", 0 0, v0x55e005759d50_0;  1 drivers
+v0x55e005759a80_0 .net "C", 0 0, L_0x55e00575a1f0;  alias, 1 drivers
+v0x55e005759b20_0 .net "S", 0 0, L_0x55e005759ff0;  alias, 1 drivers
+    .scope S_0x55e005739730;
+T_0 ;
+    %vpi_call 2 8 "$monitor", $time, " A=%b, B=%b, C=%b, S=%b", v0x55e005759c90_0, v0x55e005759d50_0, v0x55e005759e20_0, v0x55e005759f20_0 {0 0 0};
+    %delay 5, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x55e005759c90_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x55e005759d50_0, 0, 1;
+    %delay 5, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x55e005759c90_0, 0, 1;
+    %delay 5, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x55e005759d50_0, 0, 1;
+    %delay 5, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x55e005759c90_0, 0, 1;
+    %delay 5, 0;
+    %vpi_call 2 13 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "tb.v";
+    "circuit.v";
